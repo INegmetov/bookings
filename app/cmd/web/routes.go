@@ -6,7 +6,6 @@ import (
 	"github.com/inegmetov/bookings/pkg/config"
 	"github.com/inegmetov/bookings/pkg/handlers"
 	"net/http"
-	"net/http/pprof"
 )
 
 func routes(app *config.AppConfig) http.Handler {
@@ -16,11 +15,7 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(SessionLoad)
 	mux.Get("/", handlers.Repo.Home)
 	mux.Get("/about", handlers.Repo.About)
-	mux.Get("/debug/pprof/", pprof.Index)
-	mux.Get("/debug/pprof/cmdline", pprof.Cmdline)
-	mux.Get("/debug/pprof/profile", pprof.Profile)
-	mux.Get("/debug/pprof/symbol", pprof.Symbol)
-	mux.Get("/debug/pprof/trace", pprof.Trace)
-	mux.Get("/debug/pprof/{cmd}", pprof.Index)
+	fileServer := http.FileServer(http.Dir("./static/"))
+	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 	return mux
 }
