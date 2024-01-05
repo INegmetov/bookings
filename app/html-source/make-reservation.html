@@ -7,11 +7,24 @@
     <title>Bootstrap demo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <style>
+        .my-footer {
+            height: 5em;
+            background-color: #343a40;
+            margin-top: 1.5em;
+            padding: 1em;
+            color: white;
+            font-size: 80%;
+        }
 
+        .room-image {
+            max-width: 50%;
+        }
+
+        p {
+
+        }
+    </style>
 </head>
 
 <body>
@@ -43,7 +56,7 @@
                 <a class="nav-link " href="reservation.html" tabindex="-1" aria-disabled="true">Book Now</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Contact</a>
+                <a class="nav-link " href="contact.html" tabindex="-1" aria-disabled="true">Contact</a>
             </li>
         </ul>
     </div>
@@ -53,7 +66,29 @@
 
     <div class="row">
         <div class="col">
-            <h1 class="text-center mt-4">This will be the about page </h1>
+            <h1 class="text-center mt-4">Make Reservation </h1>
+            <form method="post" action="" class="needs-validation" novalidate></form>
+            <div class="form-group ">
+                <label for="first_name">First name:</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off">
+            </div>
+
+            <div class="form-group ">
+                <label for="last_name">Last name:</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off">
+            </div>
+            <div class="form-group ">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" class="form-control" required autocomplete="off">
+            </div>
+            <div class="form-group ">
+                <label for="phone">Phone number:</label>
+                <input type="text" name="phone" id="phone" class="form-control" required autocomplete="off">
+            </div>
+
+            <hr>
+
+            <input type="submit" class="btn btn-primary" value="Make Reservation">
 
         </div>
     </div>
