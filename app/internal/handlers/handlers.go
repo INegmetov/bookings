@@ -3,9 +3,9 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/inegmetov/bookings/pkg/config"
-	"github.com/inegmetov/bookings/pkg/models"
-	"github.com/inegmetov/bookings/pkg/render"
+	"github.com/inegmetov/bookings/internal/config"
+	"github.com/inegmetov/bookings/internal/models"
+	"github.com/inegmetov/bookings/internal/render"
 	"log"
 	"net/http"
 	_ "net/http/pprof"

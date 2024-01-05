@@ -3,8 +3,8 @@ package render
 import (
 	"bytes"
 	"fmt"
-	"github.com/inegmetov/bookings/pkg/config"
-	"github.com/inegmetov/bookings/pkg/models"
+	"github.com/inegmetov/bookings/internal/config"
+	"github.com/inegmetov/bookings/internal/models"
 	"github.com/justinas/nosurf"
 	"html/template"
 	"log"
