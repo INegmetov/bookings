@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/inegmetov/bookings/internal/config"
+	"github.com/inegmetov/bookings/internal/forms"
 	"github.com/inegmetov/bookings/internal/models"
 	"github.com/inegmetov/bookings/internal/render"
 	"log"
@@ -52,7 +53,45 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the make a reservation page and display form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.gohtml", &models.TemplateData{})
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
+	render.RenderTemplate(w, r, "make-reservation.gohtml", &models.TemplateData{
+		Form: forms.New(nil),
+		Data: data,
+	})
+}
+
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("first_name"),
+		LastName:  r.Form.Get("last_name"),
+		Phone:     r.Form.Get("phone"),
+		Email:     r.Form.Get("email"),
+	}
+
+	form := forms.New(r.PostForm)
+
+	form.Required("first_name", "last_name", "phone", "email")
+	form.MinLength("first_name", 3, r)
+	form.IsEmail("email")
+
+	if !form.Valid() {
+		data := make(map[string]interface{})
+		data["reservation"] = reservation
+
+		render.RenderTemplate(w, r, "make-reservation.gohtml", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+		return
+	}
 }
 
 // Generals renders the room page
@@ -97,4 +136,8 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "contact.gohtml", &models.TemplateData{})
+}
+
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+
 }
