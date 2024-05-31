@@ -8,7 +8,8 @@
         <title>My nice page</title>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-              integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+              integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+              crossorigin="anonymous">
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker-bs4.min.css">
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
@@ -32,7 +33,8 @@
                     <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
                         Rooms
                     </a>
                     <div class="dropdown-menu">
@@ -124,6 +126,18 @@
             })
         }
 
+        {{with .Error}}
+        notify("{{.}}", "error")
+        {{end}}
+
+        {{with .Flash}}
+        notify("{{.}}", "success")
+        {{end}}
+
+        {{with .Warning}}
+        notify("{{.}}", "warning")
+        {{end}}
+
         function Prompt() {
             let toast = function (c) {
                 const {
@@ -189,7 +203,7 @@
                     focusConfirm: false,
                     showCancelButton: true,
                     willOpen: () => {
-                        if (c.willOpen !== undefined){
+                        if (c.willOpen !== undefined) {
                             c.willOpen();
                         }
                     },
@@ -199,22 +213,22 @@
                             document.getElementById("end").value
                         ];
                     },
-                    didOpen: ()=>{
-                       if(c.didOpen !== undefined){
-                           c.didOpen();
-                       }
+                    didOpen: () => {
+                        if (c.didOpen !== undefined) {
+                            c.didOpen();
+                        }
                     }
                 });
-                if (result){
-                    if(result.dismiss !== Swal.DismissReason.cancel){
-                        if (result.value !== ""){
-                            if (c.callback !== undefined){
+                if (result) {
+                    if (result.dismiss !== Swal.DismissReason.cancel) {
+                        if (result.value !== "") {
+                            if (c.callback !== undefined) {
                                 c.callback(result);
                             }
-                        }else {
+                        } else {
                             c.callback(false);
                         }
-                    }else {
+                    } else {
                         c.callback(false);
                     }
                 }
