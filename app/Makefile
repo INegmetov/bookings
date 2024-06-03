@@ -2,4 +2,4 @@ run:
 	 go run .\cmd\web\
 
 build:
-	go build -o ..\bin\ .\cmd\web\
+	go build -o ..\bin\booking.exe .\cmd\web\
