@@ -1,3 +1,9 @@
 .idea
 .dockerignore
 /bin/
+**/coverage
+/app/db-data/
+/app/html-source/
+/app/database.yml
+/app/database.yml.example
+/app/migrations/schema.sql
